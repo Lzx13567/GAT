@@ -35,10 +35,8 @@ class GraphAttentionLayer(nn.Module):
 
         zero_vec = -9e15 * torch.ones_like(e)
         global tmp_matrix
-        tmp_matrix = -9e15 * torch.ones(N, M, 3)  # 存放每行元素最大的M个值及坐标
+        tmp_matrix = -9e15 * torch.ones(N, M, 3) 
 
         attention = torch.where(adj > 0, e, zero_vec)
-        tmp_e = torch.where(adj > 0, zero_vec, e)  # 防止聚合e时取到邻居
+        tmp_e = torch.where(adj > 0, zero_vec, e)
         tmp_attention = attention
-
-        # print(torch.max(attention, dim=1))
